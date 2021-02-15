@@ -1,10 +1,7 @@
-package com.donutsbite.godofmem.ui.login
+package com.donutsbite.godofmem.feature.login.ui
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.donutsbite.godofmem.api.ApiService
-import com.donutsbite.godofmem.data.LoginDataSource
-import com.donutsbite.godofmem.data.LoginRepository
 
 /**
  * ViewModel provider factory to instantiate LoginViewModel.

@@ -1,4 +1,4 @@
-package com.donutsbite.godofmem.ui.login
+package com.donutsbite.godofmem.feature.login.ui
 
 /**
  * User details post authentication that is exposed to the UI

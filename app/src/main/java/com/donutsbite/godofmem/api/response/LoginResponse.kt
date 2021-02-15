@@ -1,4 +1,4 @@
-package com.donutsbite.godofmem.api
+package com.donutsbite.godofmem.api.response
 
 data class LoginResponse(
     val name: String,

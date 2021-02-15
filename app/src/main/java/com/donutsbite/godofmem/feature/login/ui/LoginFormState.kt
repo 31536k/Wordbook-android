@@ -1,4 +1,4 @@
-package com.donutsbite.godofmem.ui.login
+package com.donutsbite.godofmem.feature.login.ui
 
 /**
  * Data validation state of the login form.

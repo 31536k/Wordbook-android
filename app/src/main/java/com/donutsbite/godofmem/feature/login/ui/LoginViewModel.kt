@@ -1,4 +1,4 @@
-package com.donutsbite.godofmem.ui.login
+package com.donutsbite.godofmem.feature.login.ui
 
 import android.util.Patterns
 import androidx.lifecycle.LiveData
@@ -8,10 +8,8 @@ import com.donutsbite.godofmem.R
 import com.donutsbite.godofmem.api.ApiService
 import com.donutsbite.godofmem.api.module.ApiError
 import com.donutsbite.godofmem.api.module.ApiLauncher
-import com.donutsbite.godofmem.dto.LoginData
-import com.donutsbite.godofmem.util.ToastUtil
-import com.facebook.stetho.server.http.HttpStatus
-import retrofit2.HttpException
+import com.donutsbite.godofmem.api.dto.LoginData
+import com.donutsbite.godofmem.util.LocalSettings
 
 class LoginViewModel() : ViewModel() {
 
@@ -26,14 +24,21 @@ class LoginViewModel() : ViewModel() {
         ApiLauncher.launchMain(
             { ApiService.instance.login(LoginData(email, password)) },
             { response ->
-                _loginResult.value = LoginResult(success = LoggedInUserView(displayName = response.name))
+                LocalSettings.instance.beginCommit()
+                try {
+                    LocalSettings.instance.setAccessToken(response.accessToken)
+                    LocalSettings.instance.setRefreshToken(response.refreshToken)
+                } finally {
+                    LocalSettings.instance.syncCommit()
+                }
+                _loginResult.value = LoginResult(LoggedInUserView(response.name))
             },
             {
                 error ->
                 if (error.code == ApiError.BAD_REQUEST) {
-                    _loginResult.value = LoginResult(error = R.string.login_bad_request)
+                    _loginResult.value = LoginResult(null, R.string.login_bad_request)
                 } else {
-                    _loginResult.value = LoginResult(error = R.string.login_failed)
+                    _loginResult.value = LoginResult(null, R.string.login_failed)
                 }
 
             }
@@ -58,11 +63,14 @@ class LoginViewModel() : ViewModel() {
 
     fun loginDataChanged(email: String, password: String) {
         if (!isEmailValid(email)) {
-            _loginForm.value = LoginFormState(emailError = R.string.invalid_email)
+            _loginForm.value =
+                LoginFormState(emailError = R.string.invalid_email)
         } else if (!isPasswordValid(password)) {
-            _loginForm.value = LoginFormState(passwordError = R.string.invalid_password)
+            _loginForm.value =
+                LoginFormState(passwordError = R.string.invalid_password)
         } else {
-            _loginForm.value = LoginFormState(isDataValid = true)
+            _loginForm.value =
+                LoginFormState(isDataValid = true)
         }
     }
 

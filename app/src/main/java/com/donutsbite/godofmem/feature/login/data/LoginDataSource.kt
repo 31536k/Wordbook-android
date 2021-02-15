@@ -1,12 +1,8 @@
-package com.donutsbite.godofmem.data
+package com.donutsbite.godofmem.feature.login.data
 
-import com.donutsbite.godofmem.api.ApiService
-import com.donutsbite.godofmem.api.LoginResponse
-import com.donutsbite.godofmem.data.model.LoggedInUser
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
+import com.donutsbite.godofmem.common.data.Result
 import java.io.IOException
+import java.util.*
 
 /**
  * Class that handles authentication w/ login credentials and retrieves user information.
@@ -34,7 +30,9 @@ class LoginDataSource() {
 
         try {
             // TODO: handle loggedInUser authentication
-            val fakeUser = LoggedInUser(java.util.UUID.randomUUID().toString(), "Jane Doe")
+            val fakeUser = LoggedInUser(
+                UUID.randomUUID().toString(), "Jane Doe"
+            )
             return Result.Success(fakeUser)
         } catch (e: Throwable) {
             return Result.Error(IOException("Error logging in", e))

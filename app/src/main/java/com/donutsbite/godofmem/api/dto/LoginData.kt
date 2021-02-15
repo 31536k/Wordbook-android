@@ -1,4 +1,4 @@
-package com.donutsbite.godofmem.dto
+package com.donutsbite.godofmem.api.dto
 
 data class LoginData(
     val email: String,

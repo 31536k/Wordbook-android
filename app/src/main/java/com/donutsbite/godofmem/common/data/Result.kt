@@ -1,4 +1,4 @@
-package com.donutsbite.godofmem.data
+package com.donutsbite.godofmem.common.data
 
 /**
  * A generic class that holds a value with its loading status.

@@ -1,6 +1,6 @@
-package com.donutsbite.godofmem.data
+package com.donutsbite.godofmem.feature.login.data
 
-import com.donutsbite.godofmem.data.model.LoggedInUser
+import com.donutsbite.godofmem.common.data.Result
 
 /**
  * Class that requests authentication and user information from the remote data source and
