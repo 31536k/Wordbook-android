@@ -1,7 +1,8 @@
 package com.donutsbite.godofmem.feature.book.ui
 
-import android.content.Intent
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuItem
 import android.view.View
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
@@ -24,6 +25,9 @@ class BookListActivity: AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_booklist)
 
+        val toolbar: androidx.appcompat.widget.Toolbar = findViewById(R.id.toolbar)
+        setSupportActionBar(toolbar)
+
         val headerAdapter = BookListHeaderAdapter()
         val bookListAdapter = BookListAdapter{adapterOnClick(it)}
         val concatAdapter = ConcatAdapter(headerAdapter, bookListAdapter)
@@ -44,6 +48,21 @@ class BookListActivity: AppCompatActivity() {
         }
 
         bookListViewModel.requestBookList()
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+        menuInflater.inflate(R.menu.menu_main, menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+
+        if (item.itemId == R.id.reload) {
+            ToastUtil.show("Reload")
+            bookListViewModel.reloadBookList()
+        }
+
+        return super.onOptionsItemSelected(item)
     }
 
     private fun adapterOnClick(book: Book) {

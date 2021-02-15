@@ -18,6 +18,7 @@ import androidx.activity.viewModels
 
 import com.donutsbite.godofmem.R
 import com.donutsbite.godofmem.feature.book.ui.BookListActivity
+import com.donutsbite.godofmem.util.LocalSettings
 import com.donutsbite.godofmem.util.ToastUtil
 
 class LoginActivity : AppCompatActivity() {
@@ -28,6 +29,11 @@ class LoginActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        if (LocalSettings.instance.getAccessToken().isNotBlank()) {
+            startBookListActivity()
+            finish()
+        }
 
         setContentView(R.layout.activity_login)
 
@@ -101,7 +107,12 @@ class LoginActivity : AppCompatActivity() {
         val displayName = model.displayName
         ToastUtil.show("$welcome $displayName")
 
+        startBookListActivity()
+    }
+
+    private fun startBookListActivity() {
         val intent = Intent(this, BookListActivity::class.java)
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
         startActivity(intent)
     }
 

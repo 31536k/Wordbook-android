@@ -2,12 +2,14 @@ package com.donutsbite.godofmem.api
 
 import com.donutsbite.godofmem.api.response.LoginResponse
 import com.donutsbite.godofmem.api.dto.LoginData
+import com.donutsbite.godofmem.api.dto.TokenData
 import com.donutsbite.godofmem.api.response.BookListResponse
+import com.donutsbite.godofmem.api.response.TokenResponse
 import okhttp3.OkHttpClient
+import retrofit2.Call
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.*
-
 interface ApiService {
     companion object {
         val instance: ApiService by lazy {
@@ -16,7 +18,8 @@ interface ApiService {
                 .addConverterFactory(GsonConverterFactory.create())
                 .client(
                     OkHttpClient.Builder()
-                        .addInterceptor(ApiInterceptor())
+                        .addInterceptor(ApiRequestInterceptor())
+                        .authenticator(TokenRefreshAuthenticator())
                         .build()
                 )
                 .build()
@@ -27,6 +30,10 @@ interface ApiService {
     @POST("/api/user/v1/login")
     suspend fun login(@Body loginData: LoginData): LoginResponse
 
+    @POST("/api/user/v1/refresh-token")
+    fun refreshToken(@Body tokenData: TokenData): Call<TokenResponse>
+
     @GET("/api/book/v1/books")
     suspend fun getBookList(): BookListResponse
 }
+

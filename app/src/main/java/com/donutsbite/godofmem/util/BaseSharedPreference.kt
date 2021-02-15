@@ -54,8 +54,8 @@ open class BaseSharedPreference constructor(key: String) {
         Logger.d("remove shared : key %s", key)
     }
 
-    fun getString(key: String, defaultValue: String? = null): String? {
-        return sharedPreferences.getString(key, defaultValue)
+    fun getString(key: String, defaultValue: String = ""): String {
+        return sharedPreferences.getString(key, defaultValue) ?: defaultValue
     }
 
     fun commitString(key: String, value: String) {

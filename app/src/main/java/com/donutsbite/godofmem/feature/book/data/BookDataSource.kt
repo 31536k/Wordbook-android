@@ -28,6 +28,23 @@ class BookDataSource {
         }
     }
 
+    fun setBooks(books: List<Book>) {
+        bookListLiveData.postValue(books)
+    }
+
+    fun clearBooks() {
+        bookListLiveData.postValue(mutableListOf())
+    }
+
+    fun reload() {
+        clearBooks()
+        ApiLauncher.launchMain(
+            { ApiService.instance.getBookList() },
+            { response -> setBooks(response.books.map{Book.fromResponse(it)}) },
+            { error -> ToastUtil.show("목록을 불러오지 못했습니다.")}
+        )
+    }
+
     fun requestBookList() {
         ApiLauncher.launchMain(
             { ApiService.instance.getBookList() },

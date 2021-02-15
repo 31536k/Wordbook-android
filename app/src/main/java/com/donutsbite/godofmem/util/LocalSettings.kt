@@ -18,7 +18,7 @@ class LocalSettings {
         PREF.syncCommit()
     }
 
-    fun getAccessToken(): String? {
+    fun getAccessToken(): String {
         return PREF.getString(StringStore.accessToken)
     }
 
@@ -30,12 +30,19 @@ class LocalSettings {
         PREF.remove(StringStore.accessToken)
     }
 
-    fun getRefreshToken(): String? {
+    fun getRefreshToken(): String {
         return PREF.getString(StringStore.accessToken)
     }
 
     fun setRefreshToken(rt: String) {
         PREF.commitString(StringStore.refreshToken, rt)
+    }
+
+    fun setTokens(at: String, rt: String) {
+        beginCommit()
+        setAccessToken(at)
+        setRefreshToken(rt)
+        syncCommit()
     }
 
     fun removeRefreshToken() {
