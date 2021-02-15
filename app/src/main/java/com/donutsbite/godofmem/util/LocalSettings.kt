@@ -31,7 +31,7 @@ class LocalSettings {
     }
 
     fun getRefreshToken(): String {
-        return PREF.getString(StringStore.accessToken)
+        return PREF.getString(StringStore.refreshToken)
     }
 
     fun setRefreshToken(rt: String) {

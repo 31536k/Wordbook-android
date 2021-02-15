@@ -19,7 +19,6 @@ interface ApiService {
                 .client(
                     OkHttpClient.Builder()
                         .addInterceptor(ApiRequestInterceptor())
-                        .authenticator(TokenRefreshAuthenticator())
                         .build()
                 )
                 .build()
