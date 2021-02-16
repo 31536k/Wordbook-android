@@ -9,11 +9,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:text="공책 목록"
+        android:text="단원 목록"
         android:textAppearance="?attr/textAppearanceHeadline3" />
 
     <TextView
-        android:id="@+id/book_count"
+        android:id="@+id/chapter_count"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
@@ -23,7 +23,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:text="개의 공책"
+        android:text="개의 단원"
         android:textAppearance="?attr/textAppearanceHeadline6" />
 
 </LinearLayout>

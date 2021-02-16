@@ -17,7 +17,7 @@ class BookDataSource {
         addAllBook(listOf(book))
     }
 
-    fun addAllBook(books: List<Book>) {
+    private fun addAllBook(books: List<Book>) {
         val currentList = bookListLiveData.value
         if (currentList == null) {
             bookListLiveData.postValue(books)
@@ -32,7 +32,7 @@ class BookDataSource {
         bookListLiveData.postValue(books)
     }
 
-    fun clearBooks() {
+    private fun clearBooks() {
         bookListLiveData.postValue(mutableListOf())
     }
 

@@ -15,7 +15,7 @@ class BookListAdapter(
 ): ListAdapter<Book, BookListAdapter.BookViewHolder>(BookDiffCallback) {
 
     class BookViewHolder(itemView: View, val onClick: (Book) -> Unit): RecyclerView.ViewHolder(itemView) {
-        private val titleView: TextView = itemView.findViewById(R.id.book_title)
+        private val titleView: TextView = itemView.findViewById(R.id.title)
         private var currentBook: Book? = null
 
         init {

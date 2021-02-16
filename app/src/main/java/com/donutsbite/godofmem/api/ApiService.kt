@@ -4,6 +4,7 @@ import com.donutsbite.godofmem.api.response.LoginResponse
 import com.donutsbite.godofmem.api.dto.LoginData
 import com.donutsbite.godofmem.api.dto.TokenData
 import com.donutsbite.godofmem.api.response.BookListResponse
+import com.donutsbite.godofmem.api.response.ChapterListResponse
 import com.donutsbite.godofmem.api.response.TokenResponse
 import okhttp3.OkHttpClient
 import retrofit2.Call
@@ -34,5 +35,8 @@ interface ApiService {
 
     @GET("/api/book/v1/books")
     suspend fun getBookList(): BookListResponse
+
+    @GET("/api/chapter/v1/chapters")
+    suspend fun getChaptersOfBook(@Query("bookid") bookId: Int): ChapterListResponse
 }
 

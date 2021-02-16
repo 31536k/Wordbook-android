@@ -23,6 +23,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".feature.book.ui.BookListActivity" />
+        <activity android:name=".feature.chapter.ui.ChapterListActivity" />
     </application>
 
 </manifest>

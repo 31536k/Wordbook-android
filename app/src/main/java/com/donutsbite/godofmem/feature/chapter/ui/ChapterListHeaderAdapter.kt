@@ -1,4 +1,4 @@
-package com.donutsbite.godofmem.feature.book.ui
+package com.donutsbite.godofmem.feature.chapter.ui
 
 import android.view.LayoutInflater
 import android.view.View
@@ -7,28 +7,28 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.donutsbite.godofmem.R
 
-class BookListHeaderAdapter: RecyclerView.Adapter<BookListHeaderAdapter.HeaderViewHolder>() {
-    private var bookCount: Int = 0
+class ChapterListHeaderAdapter: RecyclerView.Adapter<ChapterListHeaderAdapter.HeaderViewHolder>() {
+    private var chapterCount: Int = 0
 
     /* ViewHolder for displaying header. */
     class HeaderViewHolder(view: View) : RecyclerView.ViewHolder(view){
-        private val bookCountTextView: TextView = itemView.findViewById(R.id.book_count)
+        private val countTextView: TextView = itemView.findViewById(R.id.chapter_count)
 
-        fun bind(flowerCount: Int) {
-            bookCountTextView.text = flowerCount.toString()
+        fun bind(count: Int) {
+            countTextView.text = count.toString()
         }
     }
 
     /* Inflates view and returns HeaderViewHolder. */
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HeaderViewHolder {
         val view = LayoutInflater.from(parent.context)
-            .inflate(R.layout.booklist_header_item, parent, false)
+            .inflate(R.layout.chapterlist_header_item, parent, false)
         return HeaderViewHolder(view)
     }
 
     /* Binds number of flowers to the header. */
     override fun onBindViewHolder(holder: HeaderViewHolder, position: Int) {
-        holder.bind(bookCount)
+        holder.bind(chapterCount)
     }
 
     /* Returns number of items, since there is only one item in the header return one  */
@@ -37,8 +37,8 @@ class BookListHeaderAdapter: RecyclerView.Adapter<BookListHeaderAdapter.HeaderVi
     }
 
     /* Updates header to display number of flowers when a flower is added or subtracted. */
-    fun updateBookCount(updatedFlowerCount: Int) {
-        bookCount = updatedFlowerCount
+    fun updateBookCount(updatedCount: Int) {
+        chapterCount = updatedCount
         notifyDataSetChanged()
     }
 }
