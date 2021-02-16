@@ -8,6 +8,7 @@ class ApiError(val code: Int, val message: String) {
     companion object {
         const val BAD_REQUEST = 400
         const val UNAUTHORIZED = 401
+        const val FORBIDDEN = 403
         const val INTERNAL_ERROR = -999
         const val MAINTENANCE_ERROR = -800
         const val NETWORK_ERROR = -600

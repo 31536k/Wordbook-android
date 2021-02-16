@@ -19,6 +19,6 @@ class BookListViewModel(
     }
 
     fun reloadBookList() {
-        bookDataSource.reload()
+        bookDataSource.requestBookList()
     }
 }

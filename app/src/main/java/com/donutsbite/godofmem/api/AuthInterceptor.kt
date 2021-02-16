@@ -3,35 +3,73 @@ package com.donutsbite.godofmem.api
 import com.donutsbite.godofmem.api.dto.TokenData
 import com.donutsbite.godofmem.api.module.ApiError
 import com.donutsbite.godofmem.util.LocalSettings
-import com.orhanobut.logger.Logger
-import okhttp3.*
+import com.facebook.stetho.server.http.HttpStatus
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.runBlocking
+import okhttp3.Interceptor
+import okhttp3.Request
+import okhttp3.Response
+import java.io.IOException
 
 class ApiRequestInterceptor: Interceptor {
+    private var tryCount = 0
     override fun intercept(chain: Interceptor.Chain): Response {
         val orgRequest = chain.request()
         val response = chain.proceed(orgRequest.signedRequest())
-        if (response.code() == ApiError.UNAUTHORIZED) {
+        return if (response.code() == ApiError.UNAUTHORIZED) {
+            val tokenRefreshed = this.requestRefreshToken(3)
+            if (tokenRefreshed) {
+                chain.proceed(orgRequest.signedRequest())
+            } else {
+                // 토큰 갱신 실패
+                // TODO 로그아웃 상태로 전환
+                LocalSettings.instance.removeTokens()
+                response
+            }
+        } else {
+            response
+        }
+    }
+
+    private fun requestRefreshToken(totalTryCount: Int): Boolean {
+        tryCount = 0
+
+        return runBlocking {
+            var status = 0
+            // 성공하거나 403 이면 retry 하지 않는다
+            while(status != HttpStatus.HTTP_OK && status != ApiError.FORBIDDEN && tryCount < totalTryCount) {
+                delay(2000L * tryCount)
+                tryCount++
+                status = refreshToken()
+            }
+
+            status == HttpStatus.HTTP_OK
+        }
+    }
+
+    private fun refreshToken(): Int {
+        var statusCode = 0
+        try {
             val tokenData = TokenData(
                 LocalSettings.instance.getAccessToken(),
                 LocalSettings.instance.getRefreshToken()
             )
-            val tokenResponse = ApiService.instance.refreshToken(tokenData).execute().body()
-            return if (tokenResponse != null) {
-                LocalSettings.instance.setTokens(tokenResponse.accessToken, tokenResponse.refreshToken)
-                chain.proceed(orgRequest.signedRequest())
-            } else {
-                // 토큰 갱신 실패
-                // 로그인 화면으로 이동한다. Event 전송
-                response
+
+            val response = ApiService.instance.refreshToken(tokenData).execute()
+            val tokenResponse = response.body()
+            tokenResponse?.let {
+                LocalSettings.instance.setTokens(it.accessToken, it.refreshToken)
             }
-        } else {
-            return response
+
+            statusCode = response.code()
+        } catch (e: IOException) {
         }
+
+        return statusCode
     }
 
     private fun Request.signedRequest(): Request {
         val accessToken = LocalSettings.instance.getAccessToken()
-        Logger.i("1_______________ request with $accessToken")
         return newBuilder()
             .addHeader("Authorization", "Bearer $accessToken")
             .build()

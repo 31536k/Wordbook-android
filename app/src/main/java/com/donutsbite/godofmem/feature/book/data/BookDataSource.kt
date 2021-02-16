@@ -36,16 +36,8 @@ class BookDataSource {
         bookListLiveData.postValue(mutableListOf())
     }
 
-    fun reload() {
-        clearBooks()
-        ApiLauncher.launchMain(
-            { ApiService.instance.getBookList() },
-            { response -> setBooks(response.books.map{Book.fromResponse(it)}) },
-            { error -> ToastUtil.show("목록을 불러오지 못했습니다.")}
-        )
-    }
-
     fun requestBookList() {
+        clearBooks()
         ApiLauncher.launchMain(
             { ApiService.instance.getBookList() },
             { response -> addAllBook(response.books.map{Book.fromResponse(it)}) },
