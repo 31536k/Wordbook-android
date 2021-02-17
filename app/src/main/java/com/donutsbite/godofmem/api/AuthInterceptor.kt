@@ -1,8 +1,10 @@
 package com.donutsbite.godofmem.api
 
+import com.donutsbite.godofmem.BuildConfig
 import com.donutsbite.godofmem.api.dto.TokenData
 import com.donutsbite.godofmem.api.module.ApiError
 import com.donutsbite.godofmem.util.LocalSettings
+import com.donutsbite.godofmem.util.StringStore
 import com.facebook.stetho.server.http.HttpStatus
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.runBlocking
@@ -72,6 +74,7 @@ class ApiRequestInterceptor: Interceptor {
         val accessToken = LocalSettings.instance.getAccessToken()
         return newBuilder()
             .addHeader("Authorization", "Bearer $accessToken")
+            .addHeader(StringStore.A, "${StringStore.android}/${BuildConfig.VERSION_NAME}")
             .build()
     }
 }
