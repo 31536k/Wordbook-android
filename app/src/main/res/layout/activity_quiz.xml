@@ -74,7 +74,7 @@
 
     </RelativeLayout>
 
-    <View
+    <RelativeLayout
         android:id="@+id/question_view"
         android:layout_width="0dp"
         android:layout_height="0dp"
@@ -86,7 +86,47 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@id/status_view"
-        app:layout_constraintTop_toTopOf="@id/status_view" />
+        app:layout_constraintTop_toTopOf="@id/status_view">
+
+        <TextView
+            android:id="@+id/question_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="20dp"
+            android:paddingLeft="20dp"
+            android:paddingRight="20dp"
+            android:gravity="center"
+            android:text="문제입니다"
+            android:textSize="30sp"
+            android:textColor="@color/black"
+            android:lines="8" />
+
+        <TextView
+            android:id="@+id/answer_text"
+            android:layout_below="@+id/question_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="20dp"
+            android:paddingLeft="20dp"
+            android:paddingRight="20dp"
+            android:gravity="center"
+            android:text="정답입니다"
+            android:textSize="20sp"
+            android:textColor="@color/black"
+            android:lines="3" />
+
+        <ImageButton
+            android:id="@+id/undo_btn"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:src="@drawable/undo"
+            android:scaleType="fitCenter">
+
+        </ImageButton>
+
+    </RelativeLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
