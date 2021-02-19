@@ -1,11 +1,8 @@
 package com.donutsbite.godofmem.api
 
-import com.donutsbite.godofmem.api.response.LoginResponse
 import com.donutsbite.godofmem.api.dto.LoginData
 import com.donutsbite.godofmem.api.dto.TokenData
-import com.donutsbite.godofmem.api.response.BookListResponse
-import com.donutsbite.godofmem.api.response.ChapterListResponse
-import com.donutsbite.godofmem.api.response.TokenResponse
+import com.donutsbite.godofmem.api.response.*
 import okhttp3.OkHttpClient
 import retrofit2.Call
 import retrofit2.Retrofit
@@ -37,6 +34,9 @@ interface ApiService {
     suspend fun getBookList(): BookListResponse
 
     @GET("/api/chapter/v1/chapters")
-    suspend fun getChaptersOfBook(@Query("bookid") bookId: Int): ChapterListResponse
+    suspend fun getChaptersOfBook(@Query("bookid") bookId: Long): ChapterListResponse
+
+    @GET("/api/question/v1/questions")
+    suspend fun getQuestionsInChapter(@Query("chapterid") chapterId: Long): QuestionListInChapterResponse
 }
 

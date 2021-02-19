@@ -16,7 +16,7 @@ object ApiErrorHandler {
     }
 
     private fun createError(errorCode: Int, serverMessage: String?, showServerErrorToast: Boolean): ApiError {
-        var clientMessage: String = ""
+        var clientMessage = ""
 
         if (!serverMessage.isNullOrBlank()) {
             clientMessage = serverMessage

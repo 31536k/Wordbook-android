@@ -36,7 +36,7 @@ class ChapterDataSource {
         chapterListLiveData.postValue(mutableListOf())
     }
 
-    fun requestChaptersOfBook(bookId: Int) {
+    fun requestChaptersOfBook(bookId: Long) {
         clearChapters()
         ApiLauncher.launchMain(
             { ApiService.instance.getChaptersOfBook(bookId) },

@@ -135,7 +135,7 @@
         android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent">
 
-        <view
+        <View
             android:layout_width="12dp"
             android:layout_height="match_parent" />
 
@@ -149,7 +149,7 @@
             tools:layout_editor_absoluteX="24dp"
             tools:layout_editor_absoluteY="633dp" />
 
-        <view
+        <View
             android:layout_width="20dp"
             android:layout_height="match_parent" />
 
@@ -163,7 +163,7 @@
             tools:layout_editor_absoluteX="159dp"
             tools:layout_editor_absoluteY="633dp" />
 
-        <view
+        <View
             android:layout_width="20dp"
             android:layout_height="match_parent" />
 
@@ -177,7 +177,7 @@
             tools:layout_editor_absoluteX="294dp"
             tools:layout_editor_absoluteY="633dp" />
 
-        <view
+        <View
             android:layout_width="12dp"
             android:layout_height="match_parent" />
 

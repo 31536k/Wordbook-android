@@ -1,4 +1,4 @@
-package com.donutsbite.godofmem.feature.chapter.ui
+package com.donutsbite.godofmem.feature.question.ui
 
 import android.content.Intent
 import android.os.Bundle
@@ -11,39 +11,37 @@ import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.ConcatAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.donutsbite.godofmem.R
-import com.donutsbite.godofmem.feature.chapter.data.Chapter
-import com.donutsbite.godofmem.feature.question.ui.QuestionListActivity
+import com.donutsbite.godofmem.feature.question.data.Question
 import com.donutsbite.godofmem.feature.quiz.ui.QuizActivity
 import com.donutsbite.godofmem.util.StringStore
 import com.donutsbite.godofmem.util.ToastUtil
 
-class ChapterListActivity: AppCompatActivity() {
-
-    private var bookId: Long = 0
-    private val chapterListViewModel by viewModels<ChapterListViewModel> {
-        ChapterListViewModelFactory()
+class QuestionListActivity: AppCompatActivity() {
+    private var chapterId: Long = 0
+    private val questionListViewModel by viewModels<QuestionListViewModel> {
+        QuestionListViewModelFactory()
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_chapterlist)
 
-        bookId = intent.getLongExtra(StringStore.bookId, 0)
+        chapterId = intent.getLongExtra(StringStore.chapterId, 0)
 
         val toolbar: androidx.appcompat.widget.Toolbar = findViewById(R.id.toolbar)
         setSupportActionBar(toolbar)
 
-        val headerAdapter = ChapterListHeaderAdapter()
-        val chapterListAdapter = ChapterListAdapter{adapterOnClick(it)}
-        val concatAdapter = ConcatAdapter(headerAdapter, chapterListAdapter)
+        val headerAdapter = QuestionListHeaderAdapter()
+        val questionListAdapter = QuestionListAdapter{adapterOnClick(it)}
+        val concatAdapter = ConcatAdapter(headerAdapter, questionListAdapter)
 
         val recyclerview: RecyclerView = findViewById(R.id.recycler_view)
         recyclerview.adapter = concatAdapter
 
-        chapterListViewModel.chapterListLiveData.observe(this, Observer {
+        questionListViewModel.questionListLiveData.observe(this, Observer {
             it?.let {
-                chapterListAdapter.submitList(it as MutableList<Chapter>)
-                headerAdapter.updateBookCount(it.size)
+                questionListAdapter.submitList(it as MutableList<Question>)
+                headerAdapter.updateWordCount(it.size)
             }
         })
 
@@ -52,27 +50,30 @@ class ChapterListActivity: AppCompatActivity() {
             fabOnClick()
         }
 
-        chapterListViewModel.requestChaptersOfBook(bookId = bookId)
+        questionListViewModel.requestWordsInChapter(chapterId)
     }
 
-    private fun adapterOnClick(chapter: Chapter) {
-        val intent = Intent(this, QuestionListActivity::class.java)
-        intent.putExtra(StringStore.chapterId, chapter.id)
-        startActivity(intent)
+    private fun adapterOnClick(question: Question) {
+        ToastUtil.show("Question Asking - ${question.asking}")
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
-        menuInflater.inflate(R.menu.menu_chapter_list, menu)
+        menuInflater.inflate(R.menu.menu_question_list, menu)
         return true
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
 
-        if (item.itemId == R.id.reload) {
-            chapterListViewModel.requestChaptersOfBook(bookId)
+        if (item.itemId == R.id.start_quiz) {
+            startQuizActivity()
         }
 
         return super.onOptionsItemSelected(item)
+    }
+
+    private fun startQuizActivity() {
+        val intent = Intent(this, QuizActivity::class.java)
+        startActivity(intent)
     }
 
     private fun fabOnClick() {

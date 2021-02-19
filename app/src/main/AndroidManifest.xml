@@ -24,6 +24,8 @@
         </activity>
         <activity android:name=".feature.book.ui.BookListActivity" />
         <activity android:name=".feature.chapter.ui.ChapterListActivity" />
+        <activity android:name=".feature.quiz.ui.QuizActivity" />
+        <activity android:name=".feature.question.ui.QuestionListActivity" />
     </application>
 
 </manifest>

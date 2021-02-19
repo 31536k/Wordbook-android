@@ -10,15 +10,11 @@ class ChapterListViewModel(
 
     val chapterListLiveData = chapterDataSource.getChapterList()
 
-    fun insertBook(chapter: Chapter) {
+    fun insertChapter(chapter: Chapter) {
         chapterDataSource.addChapter(chapter)
     }
 
-    fun requestChaptersOfBook(bookId: Int) {
-        chapterDataSource.requestChaptersOfBook(bookId)
-    }
-
-    fun reloadChaptersOfBook(bookId: Int) {
+    fun requestChaptersOfBook(bookId: Long) {
         chapterDataSource.requestChaptersOfBook(bookId)
     }
 }

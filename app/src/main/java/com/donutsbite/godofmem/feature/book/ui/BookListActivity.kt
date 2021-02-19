@@ -52,7 +52,7 @@ class BookListActivity: AppCompatActivity() {
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
-        menuInflater.inflate(R.menu.menu_main, menu)
+        menuInflater.inflate(R.menu.menu_book_list, menu)
         return true
     }
 
@@ -60,7 +60,7 @@ class BookListActivity: AppCompatActivity() {
 
         if (item.itemId == R.id.reload) {
             ToastUtil.show("Reload")
-            bookListViewModel.reloadBookList()
+            bookListViewModel.requestBookList()
         }
 
         return super.onOptionsItemSelected(item)

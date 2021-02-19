@@ -3,8 +3,8 @@ package com.donutsbite.godofmem.feature.chapter.data
 import com.donutsbite.godofmem.api.response.ChapterResponse
 
 data class Chapter(
-    val id: Int,
-    val userId: Int,
+    val id: Long,
+    val userId: Long,
     val title: String,
     val description: String?
 ) {
