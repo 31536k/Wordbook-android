@@ -1,11 +1,10 @@
 package com.donutsbite.godofmem.feature.quiz.ui
 
 import android.os.Bundle
-import android.view.Menu
-import android.view.MenuItem
 import android.view.View
 import android.widget.Button
 import android.widget.ImageButton
+import android.widget.ProgressBar
 import android.widget.TextView
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
@@ -45,6 +44,8 @@ class QuizActivity: AppCompatActivity() {
     private var quizStarted = false
     private var quizFinished = false
 
+    private lateinit var progressBar: ProgressBar
+    private lateinit var progressText: TextView
     private lateinit var unknownCountView: TextView
     private lateinit var knownCountView: TextView
     private lateinit var quizStartView: QuizStartView
@@ -97,6 +98,8 @@ class QuizActivity: AppCompatActivity() {
     }
 
     private fun setupUI() {
+        progressBar = findViewById(R.id.progress)
+        progressText = findViewById(R.id.progress_text)
         quizStartView = findViewById(R.id.quiz_start_view)
         quizStartView.visibility = View.GONE
         quizStartView.setUpRestartButton { restartQuiz() }
@@ -146,10 +149,14 @@ class QuizActivity: AppCompatActivity() {
         actionLogs.clear()
         unknownCountView.text = "0"
         knownCountView.text = "0"
+        progressText.visibility = View.VISIBLE
+        progressBar.visibility = View.VISIBLE
         showCurrentQuestion()
     }
 
     private fun showCurrentQuestion() {
+        progressBar.progress = (currentIndex+1) * 100 / quizQuestions.size
+        progressText.text = "${currentIndex+1} / ${quizQuestions.size}"
         questionTextView.text = currentAskingOrAnswer()
         answerTextView.text = "---------"
     }
@@ -231,6 +238,8 @@ class QuizActivity: AppCompatActivity() {
     }
 
     private fun onQuizFinished() {
+        progressText.visibility = View.INVISIBLE
+        progressBar.visibility = View.INVISIBLE
         quizFinished = true
         saveQuizResult()
         quizStartView.showAsFinishMode()

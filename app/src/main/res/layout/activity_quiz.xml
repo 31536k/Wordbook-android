@@ -15,16 +15,28 @@
         app:layout_constraintStart_toStartOf="parent">
 
         <ProgressBar
+            android:id="@+id/progress"
             style="?android:attr/progressBarStyleHorizontal"
             android:progressDrawable="@drawable/progress"
             android:layout_width="match_parent"
             android:layout_height="20dp"
+            android:visibility="invisible"
             android:progress="0">
         </ProgressBar>
+
+        <TextView
+            android:id="@+id/progress_text"
+            android:layout_width="match_parent"
+            android:layout_height="20dp"
+            android:visibility="invisible"
+            android:textSize="12sp"
+            android:textStyle="bold"
+            android:gravity="center"/>
 
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_below="@+id/progress"
             android:orientation="horizontal"
             android:paddingLeft="20dp"
             android:layout_centerVertical="true">
