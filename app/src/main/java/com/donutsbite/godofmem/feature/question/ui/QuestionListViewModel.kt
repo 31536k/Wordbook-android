@@ -8,13 +8,17 @@ class QuestionListViewModel(
     private val questionDataSource: QuestionDataSource
 ): ViewModel() {
 
-    val questionListLiveData = questionDataSource.getWordList()
+    val questionListLiveData = questionDataSource.getQuestionList()
 
     fun insertWord(question: Question) {
-        questionDataSource.addWord(question)
+        questionDataSource.addQuestion(question)
     }
 
     fun requestWordsInChapter(chapterId: Long) {
-        questionDataSource.requestWordsInChapter(chapterId)
+        questionDataSource.requestQuestionsInChapter(chapterId)
+    }
+
+    fun getCurrentQuestionList(): List<Question>? {
+        return questionDataSource.getCurrentQuestionList()
     }
 }

@@ -1,6 +1,7 @@
 package com.donutsbite.godofmem.api
 
 import com.donutsbite.godofmem.api.dto.LoginData
+import com.donutsbite.godofmem.api.dto.QuizResultData
 import com.donutsbite.godofmem.api.dto.TokenData
 import com.donutsbite.godofmem.api.response.*
 import okhttp3.OkHttpClient
@@ -38,5 +39,11 @@ interface ApiService {
 
     @GET("/api/question/v1/questions")
     suspend fun getQuestionsInChapter(@Query("chapterid") chapterId: Long): QuestionListInChapterResponse
+
+    @GET("/api/quiz/v1/result/{chapterId}")
+    suspend fun getQuizResult(@Path("chapterId") chapterId: Long): QuizResultResponse
+
+    @POST("/api/quiz/v1/result")
+    suspend fun saveQuizResult(@Body quizResultData: QuizResultData): QuizResultSaveResponse
 }
 

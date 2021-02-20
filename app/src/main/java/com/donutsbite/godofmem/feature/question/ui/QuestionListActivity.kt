@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.ConcatAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.donutsbite.godofmem.R
 import com.donutsbite.godofmem.feature.question.data.Question
+import com.donutsbite.godofmem.feature.question.data.QuestionsInChapter
 import com.donutsbite.godofmem.feature.quiz.ui.QuizActivity
 import com.donutsbite.godofmem.util.StringStore
 import com.donutsbite.godofmem.util.ToastUtil
@@ -24,7 +25,7 @@ class QuestionListActivity: AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_chapterlist)
+        setContentView(R.layout.activity_questionlist)
 
         chapterId = intent.getLongExtra(StringStore.chapterId, 0)
 
@@ -45,7 +46,7 @@ class QuestionListActivity: AppCompatActivity() {
             }
         })
 
-        val fab: View = findViewById(R.id.addchapter_fab)
+        val fab: View = findViewById(R.id.start_quiz)
         fab.setOnClickListener{
             fabOnClick()
         }
@@ -62,21 +63,26 @@ class QuestionListActivity: AppCompatActivity() {
         return true
     }
 
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-
-        if (item.itemId == R.id.start_quiz) {
-            startQuizActivity()
+    private fun startQuizActivity() {
+        val questionList = questionListViewModel.getCurrentQuestionList()
+        if (questionList.isNullOrEmpty()) {
+            return
         }
 
-        return super.onOptionsItemSelected(item)
-    }
+//        val intent = Intent(this, QuizActivity::class.java)
+//        val bundle = Bundle()
+//        bundle.putParcelable(
+//            StringStore.questionsInChapterData,
+//            QuestionsInChapter(chapterId, questionList)
+//        )
+//        intent.putExtra(StringStore.questionsInChapterBundle, bundle)
 
-    private fun startQuizActivity() {
         val intent = Intent(this, QuizActivity::class.java)
+        intent.putExtra(StringStore.chapterId, chapterId)
         startActivity(intent)
     }
 
     private fun fabOnClick() {
-
+        startQuizActivity()
     }
 }

@@ -12,7 +12,7 @@ class QuestionListHeaderAdapter: RecyclerView.Adapter<QuestionListHeaderAdapter.
 
     /* ViewHolder for displaying header. */
     class HeaderViewHolder(view: View) : RecyclerView.ViewHolder(view){
-        private val countTextView: TextView = itemView.findViewById(R.id.word_count)
+        private val countTextView: TextView = itemView.findViewById(R.id.question_count)
 
         fun bind(count: Int) {
             countTextView.text = count.toString()

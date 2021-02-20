@@ -13,9 +13,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.donutsbite.godofmem.R
 import com.donutsbite.godofmem.feature.chapter.data.Chapter
 import com.donutsbite.godofmem.feature.question.ui.QuestionListActivity
-import com.donutsbite.godofmem.feature.quiz.ui.QuizActivity
 import com.donutsbite.godofmem.util.StringStore
-import com.donutsbite.godofmem.util.ToastUtil
 
 class ChapterListActivity: AppCompatActivity() {
 

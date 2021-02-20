@@ -13,7 +13,7 @@
         android:textAppearance="?attr/textAppearanceHeadline5" />
 
     <TextView
-        android:id="@+id/word_count"
+        android:id="@+id/question_count"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"

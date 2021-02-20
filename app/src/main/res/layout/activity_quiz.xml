@@ -11,14 +11,15 @@
         android:layout_width="match_parent"
         android:layout_height="80dp"
         android:orientation="horizontal"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
 
         <ProgressBar
             style="?android:attr/progressBarStyleHorizontal"
             android:progressDrawable="@drawable/progress"
             android:layout_width="match_parent"
             android:layout_height="20dp"
-            android:progress="40">
+            android:progress="0">
         </ProgressBar>
 
         <LinearLayout
@@ -31,7 +32,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="아는 문제"
+                android:text="모르는 문제"
                 android:textColor="@color/black"
                 android:textSize="24sp"/>
 
@@ -57,7 +58,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="모르는 문제"
+                android:text="아는 문제"
                 android:textColor="@color/black"
                 android:textSize="24sp"/>
 
@@ -117,10 +118,13 @@
 
         <ImageButton
             android:id="@+id/undo_btn"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
             android:layout_alignParentBottom="true"
             android:layout_alignParentRight="true"
+            android:layout_marginRight="6dp"
+            android:layout_marginBottom="6dp"
+            android:background="@color/transparent"
             android:src="@drawable/undo"
             android:scaleType="fitCenter">
 
@@ -183,5 +187,9 @@
 
     </LinearLayout>
 
+    <com.donutsbite.godofmem.feature.quiz.ui.QuizStartView
+        android:id="@+id/quiz_start_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

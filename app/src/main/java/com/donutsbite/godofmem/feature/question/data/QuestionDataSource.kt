@@ -9,15 +9,19 @@ import com.donutsbite.godofmem.util.ToastUtil
 class QuestionDataSource {
     private val questionListLiveData = MutableLiveData<List<Question>>()
 
-    fun getWordList(): LiveData<List<Question>> {
+    fun getQuestionList(): LiveData<List<Question>> {
         return questionListLiveData
     }
 
-    fun addWord(question: Question) {
+    fun getCurrentQuestionList(): List<Question>? {
+        return questionListLiveData.value
+    }
+
+    fun addQuestion(question: Question) {
 
     }
 
-    fun addAllWord(questions: List<Question>) {
+    fun addAllQuestion(questions: List<Question>) {
         val currentList = questionListLiveData.value
         if (currentList == null) {
             questionListLiveData.postValue(questions)
@@ -28,19 +32,19 @@ class QuestionDataSource {
         }
     }
 
-    fun setWords(questions: List<Question>) {
+    fun setQuestions(questions: List<Question>) {
         questionListLiveData.postValue(questions)
     }
 
-    private fun clearWords() {
+    private fun clearQuestions() {
         questionListLiveData.postValue(mutableListOf())
     }
 
-    fun requestWordsInChapter(chapterId: Long) {
-        clearWords()
+    fun requestQuestionsInChapter(chapterId: Long) {
+        clearQuestions()
         ApiLauncher.launchMain(
             { ApiService.instance.getQuestionsInChapter(chapterId) },
-            { response -> addAllWord(response.questions.map{ Question.fromResponse(it)}) },
+            { response -> addAllQuestion(response.questions.map{ Question.fromResponse(it)}) },
             { error -> ToastUtil.show("목록을 불러오지 못했습니다.")}
         )
     }

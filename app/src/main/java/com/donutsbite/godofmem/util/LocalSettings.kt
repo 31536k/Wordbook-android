@@ -1,5 +1,7 @@
 package com.donutsbite.godofmem.util
 
+import com.donutsbite.godofmem.common.QuizType
+
 class LocalSettings {
 
     private val PREF: BaseSharedPreference = BaseSharedPreference("LocalSettings")
@@ -44,5 +46,13 @@ class LocalSettings {
     fun removeTokens() {
         PREF.remove(StringStore.accessToken)
         PREF.remove(StringStore.refreshToken)
+    }
+
+    fun setQuizType(type: Int) {
+        PREF.commitInt(StringStore.quizType, type)
+    }
+
+    fun getQuizType(): Int {
+        return PREF.getInt(StringStore.quizType, QuizType.FIND_ANSWER.value)
     }
 }
