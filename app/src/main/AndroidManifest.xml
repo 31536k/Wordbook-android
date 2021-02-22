@@ -14,7 +14,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.GodOfMem">
         <activity
-            android:name="com.donutsbite.godofmem.feature.login.ui.LoginActivity"
+            android:name="com.donutsbite.godofmem.feature.login.LoginActivity"
             android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -22,10 +22,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".feature.book.ui.BookListActivity" />
-        <activity android:name=".feature.chapter.ui.ChapterListActivity" />
-        <activity android:name=".feature.quiz.ui.QuizActivity" />
-        <activity android:name=".feature.question.ui.QuestionListActivity" />
+        <activity android:name=".feature.book.BookListActivity" />
+        <activity android:name=".feature.chapter.ChapterListActivity" />
+        <activity android:name=".feature.quiz.QuizActivity" />
+        <activity android:name=".feature.question.QuestionListActivity" />
     </application>
 
 </manifest>

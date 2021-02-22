@@ -37,6 +37,9 @@ interface ApiService {
     @GET("/api/chapter/v1/chapters")
     suspend fun getChaptersOfBook(@Query("bookid") bookId: Long): ChapterListResponse
 
+    @GET("/api/chapter/v1/all-chapters")
+    suspend fun getChaptersOfUser(): ChapterListResponse
+
     @GET("/api/question/v1/questions")
     suspend fun getQuestionsInChapter(@Query("chapterid") chapterId: Long): QuestionListInChapterResponse
 

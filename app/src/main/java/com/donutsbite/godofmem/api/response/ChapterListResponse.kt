@@ -7,7 +7,7 @@ data class ChapterListResponse(
 
 data class ChapterResponse(
     val id: Long,
-    val userId: Long,
+    val bookId: Long,
     val title: String,
     val description: String?
 )
