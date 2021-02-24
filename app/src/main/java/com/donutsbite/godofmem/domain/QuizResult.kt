@@ -13,8 +13,8 @@ data class QuizResult(
             QuizResult(
                 chapterId = res.chapterId,
                 allQuestions = res.allQuestions.map { Question.fromResponse(it) },
-                knownQuestionIds = res.knownQuestionIds,
-                unknownQuestionIds = res.unknownQuestionIds
+                knownQuestionIds = res.results.filter { it.know }.map { it.id },
+                unknownQuestionIds = res.results.filter { !it.know }.map{ it.id }
             )
     }
 }

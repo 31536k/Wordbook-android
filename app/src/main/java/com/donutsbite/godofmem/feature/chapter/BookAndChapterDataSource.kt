@@ -63,14 +63,14 @@ class BookAndChapterDataSource {
         ApiLauncher.launchMain(
             { ApiService.instance.getChaptersOfUser() },
             { response -> addAllChapter(response.chapters.map{ Chapter.fromResponse(it)}) },
-            { error -> ToastUtil.show("목록을 불러오지 못했습니다.")}
+            { error -> ToastUtil.show("목록을 불러오지 못했습니다. 1")}
         )
 
         clearBooks()
         ApiLauncher.launchMain(
             { ApiService.instance.getBookList() },
             { response -> addAllBook(response.books.map{ Book.fromResponse(it)}) },
-            { error -> ToastUtil.show("목록을 불러오지 못했습니다.")}
+            { error -> ToastUtil.show("목록을 불러오지 못했습니다. 2")}
         )
     }
 
