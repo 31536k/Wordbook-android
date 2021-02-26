@@ -52,6 +52,7 @@ class SharedChapterListFragment: Fragment() {
     private fun chapterAdapterOnClick(chapter: Chapter) {
         val intent = Intent(activity, QuestionListActivity::class.java)
         intent.putExtra(StringStore.chapterId, chapter.id)
+        intent.putExtra(StringStore.chapterTitle, chapter.title)
         intent.putExtra(StringStore.readOnly, true)
         startActivity(intent)
     }

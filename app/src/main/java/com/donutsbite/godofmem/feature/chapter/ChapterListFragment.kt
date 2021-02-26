@@ -56,6 +56,7 @@ class ChapterListFragment: Fragment() {
     private fun chapterAdapterOnClick(chapter: Chapter) {
         val intent = Intent(activity, QuestionListActivity::class.java)
         intent.putExtra(StringStore.chapterId, chapter.id)
+        intent.putExtra(StringStore.chapterTitle, chapter.title)
         intent.putExtra(StringStore.readOnly, false)
         startActivity(intent)
     }

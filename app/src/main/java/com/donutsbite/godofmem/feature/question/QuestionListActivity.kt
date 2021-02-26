@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
 import android.view.View
+import android.widget.TextView
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
@@ -18,6 +19,8 @@ import com.donutsbite.godofmem.util.ToastUtil
 
 class QuestionListActivity : AppCompatActivity() {
     private var chapterId: Long = 0
+    private var chapterTitle: String = "문제"
+
     private val questionListViewModel by viewModels<QuestionListViewModel> {
         QuestionListViewModelFactory()
     }
@@ -28,6 +31,7 @@ class QuestionListActivity : AppCompatActivity() {
         setContentView(R.layout.activity_questionlist)
 
         chapterId = intent.getLongExtra(StringStore.chapterId, 0)
+        chapterTitle = intent.getStringExtra(StringStore.chapterTitle)
         readOnly = intent.getBooleanExtra(StringStore.readOnly, true)
 
         setupToolbar()
@@ -67,6 +71,9 @@ class QuestionListActivity : AppCompatActivity() {
         val toolbar: Toolbar = findViewById(R.id.toolbar)
         setSupportActionBar(toolbar)
         supportActionBar?.setDisplayShowTitleEnabled(false)
+
+        val toolbarTitleView: TextView = findViewById(R.id.toolbar_title)
+        toolbarTitleView.text = chapterTitle
     }
 
     private fun adapterOnClick(question: Question) {
