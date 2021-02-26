@@ -4,12 +4,12 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import java.lang.IllegalArgumentException
 
-class BookAndChapterListViewModelFactory : ViewModelProvider.Factory {
+class ChapterListViewModelFactory : ViewModelProvider.Factory {
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
-        if (modelClass.isAssignableFrom(BookAndChapterListViewModel::class.java)) {
+        if (modelClass.isAssignableFrom(ChapterListViewModel::class.java)) {
             @Suppress("UNCHECKED_CAST")
-            return BookAndChapterListViewModel(
-                BookAndChapterDataSource.getDataSource()
+            return ChapterListViewModel(
+                ChapterDataSource.getDataSource()
             ) as T
         }
         throw IllegalArgumentException("Unknown ViewModel class")

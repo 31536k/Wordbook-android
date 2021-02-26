@@ -6,7 +6,8 @@ data class Book(
     val id: Long,
     val userId: Long,
     val title: String,
-    val description: String?
+    val description: String?,
+    var selected: Boolean
 ) {
     companion object {
         fun fromResponse(bookResponse: BookResponse) =
@@ -14,7 +15,8 @@ data class Book(
                 bookResponse.id,
                 bookResponse.userId,
                 bookResponse.title,
-                bookResponse.description
+                bookResponse.description,
+                false
             )
     }
 }

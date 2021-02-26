@@ -53,7 +53,7 @@ class QuestionListActivity: AppCompatActivity() {
             fabOnClick()
         }
 
-        questionListViewModel.requestWordsInChapter(chapterId)
+        questionListViewModel.requestQuestionsInChapter(chapterId, false)
     }
 
     private fun adapterOnClick(question: Question) {

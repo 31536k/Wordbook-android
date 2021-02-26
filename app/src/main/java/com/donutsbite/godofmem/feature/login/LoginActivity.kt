@@ -17,8 +17,7 @@ import android.widget.ProgressBar
 import androidx.activity.viewModels
 
 import com.donutsbite.godofmem.R
-import com.donutsbite.godofmem.feature.book.BookListActivity
-import com.donutsbite.godofmem.feature.chapter.ChapterListActivity
+import com.donutsbite.godofmem.feature.main.MainActivity
 import com.donutsbite.godofmem.util.LocalSettings
 import com.donutsbite.godofmem.util.ToastUtil
 
@@ -32,7 +31,7 @@ class LoginActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
 
         if (LocalSettings.instance.getAccessToken().isNotBlank()) {
-            startChpaterListActivity()
+            startMainActivity()
             finish()
         }
 
@@ -108,12 +107,12 @@ class LoginActivity : AppCompatActivity() {
         val displayName = model.displayName
         ToastUtil.show("$welcome $displayName")
 
-        startChpaterListActivity()
+        startMainActivity()
     }
 
-    private fun startChpaterListActivity() {
+    private fun startMainActivity() {
         finishAffinity()
-        val intent = Intent(this, ChapterListActivity::class.java)
+        val intent = Intent(this, MainActivity::class.java)
         startActivity(intent)
     }
 

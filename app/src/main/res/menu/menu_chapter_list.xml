@@ -3,9 +3,14 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
         android:id="@+id/reload"
-        android:icon="@drawable/ic_refresh"
-        app:showAsAction="ifRoom|withText"
+        app:showAsAction="never"
         android:title="Reload">
+    </item>
+
+    <item
+        android:id="@+id/delete"
+        app:showAsAction="never"
+        android:title="Delete">
     </item>
 
 </menu>

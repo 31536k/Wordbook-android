@@ -12,7 +12,7 @@ import androidx.recyclerview.widget.ConcatAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.donutsbite.godofmem.R
 import com.donutsbite.godofmem.domain.Book
-import com.donutsbite.godofmem.feature.chapter.ChapterListActivity
+import com.donutsbite.godofmem.feature.chapter.ChapterListFragment
 import com.donutsbite.godofmem.util.StringStore
 import com.donutsbite.godofmem.util.ToastUtil
 
@@ -71,7 +71,7 @@ class BookListActivity: AppCompatActivity() {
     }
 
     private fun adapterOnClick(book: Book) {
-        val intent = Intent(this, ChapterListActivity::class.java)
+        val intent = Intent(this, ChapterListFragment::class.java)
         intent.putExtra(StringStore.bookId, book.id)
         startActivity(intent)
     }

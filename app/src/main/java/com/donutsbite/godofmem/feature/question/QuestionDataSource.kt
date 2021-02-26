@@ -3,6 +3,7 @@ package com.donutsbite.godofmem.feature.question
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.donutsbite.godofmem.api.ApiService
+import com.donutsbite.godofmem.api.dto.QuestionRequest
 import com.donutsbite.godofmem.api.module.ApiLauncher
 import com.donutsbite.godofmem.domain.Question
 import com.donutsbite.godofmem.util.ToastUtil
@@ -41,10 +42,15 @@ class QuestionDataSource {
         questionListLiveData.postValue(mutableListOf())
     }
 
-    fun requestQuestionsInChapter(chapterId: Long) {
+    fun requestQuestionsInChapter(chapterId: Long, readOnly: Boolean) {
+        val questionRequest = QuestionRequest(
+            chapterId,
+            readOnly
+        )
+
         clearQuestions()
         ApiLauncher.launchMain(
-            { ApiService.instance.getQuestionsInChapter(chapterId) },
+            { ApiService.instance.getQuestionsInChapter(questionRequest) },
             { response -> addAllQuestion(response.questions.map{ Question.fromResponse(it)}) },
             { error -> ToastUtil.show("목록을 불러오지 못했습니다.")}
         )

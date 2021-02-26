@@ -1,6 +1,7 @@
 package com.donutsbite.godofmem.api
 
 import com.donutsbite.godofmem.api.dto.LoginData
+import com.donutsbite.godofmem.api.dto.QuestionRequest
 import com.donutsbite.godofmem.api.dto.QuizResultData
 import com.donutsbite.godofmem.api.dto.TokenData
 import com.donutsbite.godofmem.api.response.*
@@ -40,8 +41,8 @@ interface ApiService {
     @GET("/api/chapter/v1/all-chapters")
     suspend fun getChaptersOfUser(): ChapterListResponse
 
-    @GET("/api/question/v1/questions")
-    suspend fun getQuestionsInChapter(@Query("chapterid") chapterId: Long): QuestionListInChapterResponse
+    @POST("/api/question/v1/questions")
+    suspend fun getQuestionsInChapter(@Body requestData: QuestionRequest): QuestionListInChapterResponse
 
     @GET("/api/quiz/v1/result/{chapterId}")
     suspend fun getQuizResult(@Path("chapterId") chapterId: Long): QuizResultResponse

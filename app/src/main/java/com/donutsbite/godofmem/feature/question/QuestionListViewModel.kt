@@ -14,8 +14,8 @@ class QuestionListViewModel(
         questionDataSource.addQuestion(question)
     }
 
-    fun requestWordsInChapter(chapterId: Long) {
-        questionDataSource.requestQuestionsInChapter(chapterId)
+    fun requestQuestionsInChapter(chapterId: Long, readOnly: Boolean) {
+        questionDataSource.requestQuestionsInChapter(chapterId, readOnly)
     }
 
     fun getCurrentQuestionList(): List<Question>? {

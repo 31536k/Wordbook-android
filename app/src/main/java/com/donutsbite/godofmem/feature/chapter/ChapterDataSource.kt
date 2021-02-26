@@ -8,16 +8,11 @@ import com.donutsbite.godofmem.domain.Book
 import com.donutsbite.godofmem.domain.Chapter
 import com.donutsbite.godofmem.util.ToastUtil
 
-class BookAndChapterDataSource {
+class ChapterDataSource {
     private val chapterListLiveData = MutableLiveData<List<Chapter>>()
-    private val bookListLiveData = MutableLiveData<List<Book>>()
 
     fun getChapterList(): LiveData<List<Chapter>> {
         return chapterListLiveData
-    }
-
-    fun getBookList(): LiveData<List<Book>> {
-        return bookListLiveData
     }
 
     fun addChapter(chapter: Chapter) {
@@ -35,17 +30,6 @@ class BookAndChapterDataSource {
         }
     }
 
-    private fun addAllBook(books: List<Book>) {
-        val currentList = bookListLiveData.value
-        if (currentList == null) {
-            bookListLiveData.postValue(books)
-        } else {
-            val updatedList = currentList.toMutableList()
-            updatedList.addAll(0, books)
-            bookListLiveData.postValue(updatedList)
-        }
-    }
-
     fun setChapters(chapters: List<Chapter>) {
         chapterListLiveData.postValue(chapters)
     }
@@ -54,33 +38,22 @@ class BookAndChapterDataSource {
         chapterListLiveData.postValue(mutableListOf())
     }
 
-    private fun clearBooks() {
-        bookListLiveData.postValue(mutableListOf())
-    }
 
     fun requestAllBooksAndChaptersOfUser() {
-        clearChapters()
         ApiLauncher.launchMain(
             { ApiService.instance.getChaptersOfUser() },
             { response -> addAllChapter(response.chapters.map{ Chapter.fromResponse(it)}) },
             { error -> ToastUtil.show("목록을 불러오지 못했습니다. 1")}
         )
-
-        clearBooks()
-        ApiLauncher.launchMain(
-            { ApiService.instance.getBookList() },
-            { response -> addAllBook(response.books.map{ Book.fromResponse(it)}) },
-            { error -> ToastUtil.show("목록을 불러오지 못했습니다. 2")}
-        )
     }
 
     companion object {
-        private var instance: BookAndChapterDataSource? = null
+        private var instance: ChapterDataSource? = null
 
-        fun getDataSource(): BookAndChapterDataSource {
-            return synchronized(BookAndChapterDataSource::class) {
+        fun getDataSource(): ChapterDataSource {
+            return synchronized(ChapterDataSource::class) {
                 val newInstance = instance
-                    ?: BookAndChapterDataSource()
+                    ?: ChapterDataSource()
                 instance = newInstance
                 newInstance
             }
