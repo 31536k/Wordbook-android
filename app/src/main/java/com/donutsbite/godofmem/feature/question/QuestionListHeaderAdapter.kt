@@ -8,14 +8,14 @@ import androidx.recyclerview.widget.RecyclerView
 import com.donutsbite.godofmem.R
 
 class QuestionListHeaderAdapter: RecyclerView.Adapter<QuestionListHeaderAdapter.HeaderViewHolder>() {
-    private var wordCount: Int = 0
+    private var questionCount: Int = 0
 
     /* ViewHolder for displaying header. */
     class HeaderViewHolder(view: View) : RecyclerView.ViewHolder(view){
         private val countTextView: TextView = itemView.findViewById(R.id.question_count)
 
         fun bind(count: Int) {
-            countTextView.text = count.toString()
+            countTextView.text = count.toString() + "개의 문제"
         }
     }
 
@@ -30,7 +30,7 @@ class QuestionListHeaderAdapter: RecyclerView.Adapter<QuestionListHeaderAdapter.
 
     /* Binds number of flowers to the header. */
     override fun onBindViewHolder(holder: HeaderViewHolder, position: Int) {
-        holder.bind(wordCount)
+        holder.bind(questionCount)
     }
 
     /* Returns number of items, since there is only one item in the header return one  */
@@ -39,8 +39,8 @@ class QuestionListHeaderAdapter: RecyclerView.Adapter<QuestionListHeaderAdapter.
     }
 
     /* Updates header to display number of flowers when a flower is added or subtracted. */
-    fun updateWordCount(updatedCount: Int) {
-        wordCount = updatedCount
+    fun updateQuestionCount(updatedCount: Int) {
+        questionCount = updatedCount
         notifyDataSetChanged()
     }
 }

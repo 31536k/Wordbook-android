@@ -6,6 +6,7 @@ import android.view.Menu
 import android.view.View
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.Toolbar
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.ConcatAdapter
 import androidx.recyclerview.widget.RecyclerView
@@ -15,20 +16,21 @@ import com.donutsbite.godofmem.feature.quiz.QuizActivity
 import com.donutsbite.godofmem.util.StringStore
 import com.donutsbite.godofmem.util.ToastUtil
 
-class QuestionListActivity: AppCompatActivity() {
+class QuestionListActivity : AppCompatActivity() {
     private var chapterId: Long = 0
     private val questionListViewModel by viewModels<QuestionListViewModel> {
         QuestionListViewModelFactory()
     }
+    private var readOnly = true
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_questionlist)
 
         chapterId = intent.getLongExtra(StringStore.chapterId, 0)
+        readOnly = intent.getBooleanExtra(StringStore.readOnly, true)
 
-        val toolbar: androidx.appcompat.widget.Toolbar = findViewById(R.id.toolbar)
-        setSupportActionBar(toolbar)
+        setupToolbar()
 
         val headerAdapter =
             QuestionListHeaderAdapter()
@@ -44,16 +46,27 @@ class QuestionListActivity: AppCompatActivity() {
         questionListViewModel.questionListLiveData.observe(this, Observer {
             it?.let {
                 questionListAdapter.submitList(it as MutableList<Question>)
-                headerAdapter.updateWordCount(it.size)
+                headerAdapter.updateQuestionCount(it.size)
             }
         })
 
         val fab: View = findViewById(R.id.start_quiz)
-        fab.setOnClickListener{
-            fabOnClick()
+        if (readOnly) {
+            fab.visibility = View.GONE
+        } else {
+            fab.visibility = View.VISIBLE
+            fab.setOnClickListener {
+                fabOnClick()
+            }
         }
 
         questionListViewModel.requestQuestionsInChapter(chapterId, false)
+    }
+
+    private fun setupToolbar() {
+        val toolbar: Toolbar = findViewById(R.id.toolbar)
+        setSupportActionBar(toolbar)
+        supportActionBar?.setDisplayShowTitleEnabled(false)
     }
 
     private fun adapterOnClick(question: Question) {

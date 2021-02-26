@@ -31,7 +31,8 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="left"
                 android:text="모든 노트북"
-                android:textSize="18dp" />
+                android:textSize="18dp"
+                android:textColor="@color/black"/>
 
         </androidx.appcompat.widget.Toolbar>
 

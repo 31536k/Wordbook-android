@@ -14,6 +14,11 @@ class ChapterListViewModel(
     }
 
     fun requestChaptersOfUser() {
-        chapterDataSource.requestAllBooksAndChaptersOfUser()
+        chapterDataSource.requestChaptersOfUser()
+    }
+
+    override fun onCleared() {
+        chapterDataSource.clearChapters()
+        super.onCleared()
     }
 }

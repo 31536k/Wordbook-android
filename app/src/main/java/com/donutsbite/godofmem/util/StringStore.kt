@@ -10,4 +10,5 @@ object StringStore {
     const val A = "A"
     const val android = "android"
     const val quizType = "quizType"
+    const val readOnly = "readOnly"
 }

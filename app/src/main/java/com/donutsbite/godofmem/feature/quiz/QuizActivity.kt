@@ -151,10 +151,10 @@ class QuizActivity: AppCompatActivity() {
         knownCountView.text = "0"
         progressText.visibility = View.VISIBLE
         progressBar.visibility = View.VISIBLE
-        showCurrentQuestion()
+        updateScreen()
     }
 
-    private fun showCurrentQuestion() {
+    private fun updateScreen() {
         progressBar.progress = (currentIndex+1) * 100 / quizQuestions.size
         progressText.text = "${currentIndex+1} / ${quizQuestions.size}"
         questionTextView.text = currentAskingOrAnswer()
@@ -233,7 +233,7 @@ class QuizActivity: AppCompatActivity() {
         }
         answerVisible = false
         currentIndex += 1
-        showCurrentQuestion()
+        updateScreen()
         return true
     }
 
@@ -261,9 +261,8 @@ class QuizActivity: AppCompatActivity() {
     }
 
     private fun unDo() {
-        if (actionLogs.isNullOrEmpty()) {
+        if (!actionLogs.isNullOrEmpty()) {
             this.answerVisible = false;
-            var targetIds = 0
             if (actionLogs.last() === "unknown") {
                 unknownQuestionIds.removeAt(unknownQuestionIds.lastIndex)
             } else {
@@ -271,6 +270,8 @@ class QuizActivity: AppCompatActivity() {
             }
             actionLogs.removeAt(actionLogs.lastIndex)
             this.currentIndex -= 1;
+
+            updateScreen()
         }
     }
 
