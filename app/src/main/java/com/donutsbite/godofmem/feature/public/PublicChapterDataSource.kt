@@ -1,4 +1,4 @@
-package com.donutsbite.godofmem.feature.shared
+package com.donutsbite.godofmem.feature.public
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -7,7 +7,7 @@ import com.donutsbite.godofmem.api.module.ApiLauncher
 import com.donutsbite.godofmem.domain.Chapter
 import com.donutsbite.godofmem.util.ToastUtil
 
-class SharedChapterDataSource {
+class PublicChapterDataSource {
     private val chapterListLiveData = MutableLiveData<List<Chapter>>()
 
     fun getChapterList(): LiveData<List<Chapter>> {
@@ -38,21 +38,21 @@ class SharedChapterDataSource {
     }
 
 
-    fun requestSharedChapters() {
+    fun requestPublicChapters() {
         ApiLauncher.launchMain(
-            { ApiService.instance.getSharedChapters() },
+            { ApiService.instance.getPublicChapters() },
             { response -> addAllChapter(response.chapters.map{ Chapter.fromResponse(it)}) },
             { error -> ToastUtil.show("목록을 불러오지 못했습니다. 1")}
         )
     }
 
     companion object {
-        private var instance: SharedChapterDataSource? = null
+        private var instance: PublicChapterDataSource? = null
 
-        fun getDataSource(): SharedChapterDataSource {
-            return synchronized(SharedChapterDataSource::class) {
+        fun getDataSource(): PublicChapterDataSource {
+            return synchronized(PublicChapterDataSource::class) {
                 val newInstance = instance
-                    ?: SharedChapterDataSource()
+                    ?: PublicChapterDataSource()
                 instance = newInstance
                 newInstance
             }

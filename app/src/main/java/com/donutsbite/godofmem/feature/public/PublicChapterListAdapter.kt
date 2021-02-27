@@ -1,4 +1,4 @@
-package com.donutsbite.godofmem.feature.shared
+package com.donutsbite.godofmem.feature.public
 
 import android.view.LayoutInflater
 import android.view.View
@@ -10,9 +10,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.donutsbite.godofmem.R
 import com.donutsbite.godofmem.domain.Chapter
 
-class SharedChapterListAdapter(
+class PublicChapterListAdapter(
     private val onClick: (Chapter) -> Unit
-): ListAdapter<Chapter, SharedChapterListAdapter.ChapterViewHolder>(
+): ListAdapter<Chapter, PublicChapterListAdapter.ChapterViewHolder>(
     ChapterDiffCallback
 ) {
     class ChapterViewHolder(itemView: View, val onClick: (Chapter) -> Unit): RecyclerView.ViewHolder(itemView) {

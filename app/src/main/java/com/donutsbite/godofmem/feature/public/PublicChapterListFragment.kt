@@ -1,4 +1,4 @@
-package com.donutsbite.godofmem.feature.shared
+package com.donutsbite.godofmem.feature.public
 
 import android.content.Intent
 import android.os.Bundle
@@ -14,16 +14,16 @@ import com.donutsbite.godofmem.domain.Chapter
 import com.donutsbite.godofmem.feature.question.QuestionListActivity
 import com.donutsbite.godofmem.util.StringStore
 
-class SharedChapterListFragment: Fragment() {
+class PublicChapterListFragment: Fragment() {
 
-    private val sharedChapterListViewModel by viewModels<SharedChapterListViewModel> {
-        SharedChapterListViewModelFactory()
+    private val publicChapterListViewModel by viewModels<PublicChapterListViewModel> {
+        PublicChapterListViewModelFactory()
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        sharedChapterListViewModel.requestSharedChapters()
+        publicChapterListViewModel.requestPublicChapters()
     }
 
     override fun onCreateView(
@@ -31,16 +31,16 @@ class SharedChapterListFragment: Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val view = inflater.inflate(R.layout.activity_shared_chapterlist, container, false)
+        val view = inflater.inflate(R.layout.activity_public_chapterlist, container, false)
 
-        val chapterListAdapter = SharedChapterListAdapter {
+        val chapterListAdapter = PublicChapterListAdapter {
             chapterAdapterOnClick(it)
         }
 
         val chapterRecyclerview: RecyclerView = view.findViewById(R.id.chapter_recycler_view)
         chapterRecyclerview.adapter = chapterListAdapter
 
-        sharedChapterListViewModel.sharedChapterListLiveData.observe(viewLifecycleOwner, Observer {
+        publicChapterListViewModel.publicChapterListLiveData.observe(viewLifecycleOwner, Observer {
             it?.let {
                 chapterListAdapter.submitList(it as MutableList<Chapter>)
             }

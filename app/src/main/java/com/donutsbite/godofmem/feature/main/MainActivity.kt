@@ -20,7 +20,7 @@ import com.donutsbite.godofmem.feature.book.BookListViewModel
 import com.donutsbite.godofmem.feature.book.BookListViewModelFactory
 import com.donutsbite.godofmem.feature.chapter.ChapterListFragment
 import com.donutsbite.godofmem.feature.profile.ProfileFragment
-import com.donutsbite.godofmem.feature.shared.SharedChapterListFragment
+import com.donutsbite.godofmem.feature.public.PublicChapterListFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class MainActivity: AppCompatActivity() {
@@ -40,7 +40,7 @@ class MainActivity: AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         fragments.add(ChapterListFragment())
-        fragments.add(SharedChapterListFragment())
+        fragments.add(PublicChapterListFragment())
         fragments.add(ProfileFragment())
 
         bottomNavigationView = findViewById(R.id.bottom_navigation_view)

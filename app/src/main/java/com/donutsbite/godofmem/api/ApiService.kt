@@ -50,7 +50,7 @@ interface ApiService {
     @POST("/api/quiz/v1/result")
     suspend fun saveQuizResult(@Body quizResultData: QuizResultData): QuizResultSaveResponse
 
-    @GET("/api/chapter/v1/shared-chapters")
-    suspend fun getSharedChapters(): ChapterListResponse
+    @GET("/api/chapter/v1/public-chapters")
+    suspend fun getPublicChapters(): ChapterListResponse
 }
 
